@@ -601,6 +601,8 @@ function genPrompt1(){
   collect();
   const p=`Sou dono de um pequeno negócio no interior de São Paulo e participo de um programa de inovação. Guarde este contexto — vou te pedir ajuda em etapas.
 
+O programa precisa transformar o diagnóstico em um projeto executável pelas empresas parceiras descritas abaixo. Minhas respostas podem trazer temas amplos; nesses casos, procure um recorte legítimo ligado a aquisição de clientes, divulgação, conversão, venda on-line, atendimento, relacionamento, retenção ou digitalização da operação comercial. Não invente problemas e não force uma conexão que os dados não sustentem.
+
 SETOR: ${S.setor||'(não informado)'}
 
 MEU PLANO ESTRATÉGICO DE INOVAÇÃO (desenvolvido por mim anteriormente; a tese é a declaração final dele):
@@ -614,23 +616,25 @@ O QUE CONSOME MEU TEMPO: ${S.q.q2||'(não informado)'}
 RECLAMAÇÃO DO CLIENTE / O QUE O CONCORRENTE FAZ: ${S.q.q3||'(não informado)'}
 
 TIPOS DE SOLUÇÃO QUE O PROGRAMA CONSEGUE APOIAR:
-A) Loja on-line e marketplaces — loja virtual própria, Mercado Livre, Shopee, Magalu e similares
-B) Sistema de gestão — controle de estoque, preço, margem, pedido e nota fiscal
-C) Atendimento e canais — WhatsApp profissional, respostas automáticas, atendimento organizado
-D) Captação e reativação — juntar e organizar contatos de clientes, chamar quem já comprou de volta
-E) Divulgação local — anúncio e mídia digital na cidade e na região
+A) Loja on-line e marketplaces — estruturar a entrada no e-commerce, configurar loja virtual e plataformas como Mercado Livre, Shopee e Magalu e integrar os canais de venda (apoio da InfoMaster)
+B) Sistema de gestão — ERP para estoque, financeiro, preço, margem, pedidos e emissão fiscal; integração entre sistemas, automação de processos e, quando necessário, software ou agente de IA (apoio da InfoMaster)
+C) Atendimento e canais — organizar e centralizar o WhatsApp, estruturar relacionamento e atendimento, acompanhar satisfação e usar IA no atendimento, com atenção também a negócios B2B (apoio da DT Networks)
+D) Captação e reativação — usar Wi-Fi Marketing e outros pontos de contato para captar dados, conhecer perfis e preferências, segmentar leads e reativar clientes (apoio da DT Networks)
+E) Divulgação local — definir estratégia de divulgação em mídia digital, offline e OOH/out-of-home; decidir quando e onde anunciar; ampliar e medir impacto e alcance; usar IA, automações, imagens e vídeos nas campanhas (apoio da DuLED)
 
 TAREFA: liste exatamente 6 OPORTUNIDADES DE INOVAÇÃO para o meu negócio — problemas a resolver ou melhorias que tragam resultado.
 
 REGRAS OBRIGATÓRIAS:
 1. Não proponha soluções. Descreva apenas a oportunidade.
-2. As oportunidades devem ser coerentes com o meu Plano Estratégico de Inovação acima.
+2. As oportunidades devem ser coerentes com o meu Plano Estratégico de Inovação. Quando ele apontar para outra área, traduza somente as implicações reais desse tema para vendas, presença digital ou operação comercial digital.
 3. Priorize as estações da régua que marquei como "É um problema" e, depois, as que marquei como "Dá pra melhorar". Não gaste oportunidade nas que já vão bem.
-4. Só proponha oportunidades que possam ser resolvidas com ferramentas e serviços que JÁ EXISTEM no mercado para contratar e adaptar. Sou uma empresa pequena, muitas vezes sem equipe. Nada que exija criar um produto novo do zero, desenvolver software próprio ou fazer investimento alto.
+4. Só proponha oportunidades cuja execução caiba nas competências da DuLED, DT Networks ou InfoMaster descritas acima. Prefira ferramentas e serviços existentes, contratáveis e adaptáveis. Integração, automação, software sob medida ou agente de IA só entram quando forem realmente necessários e couberem na atuação da InfoMaster; nada de pesquisa tecnológica ou produto experimental criado do zero.
 5. Ao estimar o esforço, considere o esforço real para uma empresa pequena contratar e colocar aquilo para funcionar — não o esforço de uma empresa grande.
-6. Toda oportunidade precisa ter caminho digital — algo que se resolva com ferramenta, sistema, canal on-line ou automação. Não proponha oportunidade cuja solução seja apenas negociação, contratação de pessoal ou obra.
+6. Toda oportunidade precisa ter caminho digital e relação clara com resultado comercial — aquisição, divulgação, conversão, venda, atendimento, relacionamento, retenção ou eficiência da operação que sustenta as vendas. Não proponha oportunidade cuja solução seja apenas negociação, contratação de pessoal ou obra.
 7. Linguagem simples e direta, sem jargão.
-8. RESTRIÇÃO PRINCIPAL: só liste oportunidades cuja solução caiba em UMA das cinco famílias acima. Se a oportunidade não puder ser resolvida por nenhuma delas, NÃO a inclua na lista — troque por outra que caiba.
+8. RESTRIÇÃO PRINCIPAL: só liste oportunidades cuja execução tenha aderência concreta a pelo menos UMA das cinco famílias acima e, portanto, possa ser apoiada por uma das três parceiras. Se não houver aderência, NÃO inclua a oportunidade — procure outra sustentada pelas respostas.
+9. Não distorça o diagnóstico para fazê-lo caber no programa. O recorte digital ou comercial precisa ser plausível e rastreável a uma informação que forneci. Se um tema não tiver conexão legítima com as famílias apoiadas, descarte-o.
+10. Formule cada oportunidade como um problema ou melhoria específica e observável, deixando claro onde o resultado é perdido ou pode avançar, mas sem antecipar a solução.
 
 FORMATO DA RESPOSTA — uma linha por oportunidade, exatamente assim, sem título, sem introdução, sem conclusão, sem negrito:
 
@@ -776,7 +780,13 @@ function renderChosen(){
 function genPrompt2(){
   collect();
   const o=S.opps.find(x=>x.id===S.chosen);
-  const p=`Estou descrevendo uma oportunidade de inovação para o meu pequeno negócio${S.setor?' do setor de '+S.setor:''}. Já preenchi os campos abaixo. Avalie com senso crítico: se estiver bom, confirme; se puder ficar mais claro, mais preciso ou mais forte, devolva uma versão melhor e explique em uma frase por que mudou.
+  const p=`Estou descrevendo uma oportunidade de inovação para o meu pequeno negócio${S.setor?' do setor de '+S.setor:''}. Já preenchi os campos abaixo. Avalie com senso crítico e devolva uma versão mais clara, precisa e forte quando necessário.
+
+CONTEXTO OBRIGATÓRIO DO PROGRAMA:
+O projeto final precisa ter relação real com vendas, presença digital ou digitalização da operação comercial e ser executável por pelo menos uma destas frentes parceiras:
+- DuLED: estratégia de divulgação; mídia digital, offline e OOH; quando e onde anunciar; impacto, alcance e mensuração; IA, automações, imagens e vídeos.
+- DT Networks: Wi-Fi Marketing; captação e segmentação de leads; perfis e preferências; relacionamento; WhatsApp centralizado; satisfação e IA no atendimento; soluções B2B.
+- InfoMaster: ERP, estoque, financeiro e fiscal; marketplaces e e-commerce; plataformas de venda; integrações, automações, software e agentes de IA quando necessários.
 
 OPORTUNIDADE ESCOLHIDA: ${o?o.t:'(não escolhida)'}
 
@@ -806,6 +816,9 @@ Como podemos: ...
 
 REGRAS:
 - Nunca proponha solução — descreva problema ou melhoria
+- Preserve o problema real relatado, mas, se ele estiver amplo ou fora do foco, procure um recorte legítimo ligado a aquisição, divulgação, conversão, venda, atendimento, relacionamento, retenção ou eficiência da operação comercial
+- A oportunidade revisada precisa ter caminho de execução dentro de pelo menos uma das três frentes parceiras acima
+- Não invente dados nem force uma conexão digital. Se as informações fornecidas não sustentarem esse recorte, não fabrique um problema
 - Linguagem direta, sem jargão
 - Em "Vou saber que deu certo quando", puxe por um sinal concreto e mensurável
 - "Como podemos" tem que ser pergunta aberta, que não trave numa solução só
@@ -849,14 +862,20 @@ function genPrompt3(){
   const p=`Meu desafio é: "${desafio}"
 Meu negócio: ${S.setor||'pequeno negócio'}, no interior de São Paulo, empresa pequena e sem equipe de tecnologia.
 
-Liste 3 formas como esse tipo de problema JÁ É RESOLVIDO hoje no mercado. Para cada uma:
+O projeto será desenvolvido com apoio de uma ou mais destas frentes:
+- DuLED: divulgação, mídia digital/offline/OOH, planejamento de campanha, impacto, alcance, mensuração, IA, automações, imagens e vídeos.
+- DT Networks: Wi-Fi Marketing, captação e segmentação de leads, perfis e preferências, relacionamento, WhatsApp centralizado, satisfação e IA no atendimento, especialmente B2B.
+- InfoMaster: ERP, estoque, financeiro e fiscal, marketplaces, e-commerce, plataformas de venda, integrações, automações, software e agentes de IA.
+
+Liste 3 formas como esse tipo de problema JÁ É RESOLVIDO hoje no mercado e que possam ser implantadas dentro dessas competências. Para cada uma:
 - O que é, em uma frase
 - Um exemplo de ferramenta ou serviço que faz isso (com o site, se souber)
 - Quanto custa mais ou menos, se você souber
 - O que é bom para uma empresa pequena
 - O que é ruim ou limitado
+- Qual frente parceira consegue viabilizar: DuLED, DT Networks, InfoMaster ou uma combinação delas, e por quê
 
-Só coisas que uma empresa pequena consegue contratar e usar. Nada de solução que exija desenvolver software próprio.
+Só inclua caminhos realistas para uma empresa pequena contratar, configurar e usar. Prefira soluções existentes; integração, software sob medida ou agente de IA só quando forem necessários e viáveis pela InfoMaster. Não inclua pesquisa tecnológica, produto experimental nem opção fora das competências acima.
 Resposta em lista simples, sem tabela, sem introdução e sem conclusão.`;
   $('p3-text').textContent=p;$('p3-box').style.display='block';copyRaw(p);toast('Prompt copiado');
 }
